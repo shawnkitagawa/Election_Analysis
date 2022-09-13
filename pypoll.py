@@ -66,20 +66,35 @@ with open(file_to_load) as election_data:
         f"----------------------\n"
     )
     
-    print(winning_candidate_summary)
+print(winning_candidate_summary)
 
 print(total_votes)
 print(candidate_options)
 print(candidate_votes)
 
-'''
+candidate_votes[candidate_name] += 1
+
+
 with open(file_to_save, "w") as txt_file:
 
-    #three counties to the file
-    txt_file.write("Counties in the Election \n")
-    txt_file.write("------------------------\n")
-    txt_file.write("Arapahoe\n")
-    txt_file.write("Denver\n")
-    txt_file.write("Jefferson\n")
+    election_results = (
 
-'''
+        f"\nElection Results\n"
+        f"----------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"------------------------\n"
+    )
+    print(election_results, end="")
+    # Save the final vote count to the text file 
+    txt_file.write(election_results)
+    for candidate_name in candidate_votes:
+        votes = candidate_votes[candidate_name]
+        vote_pecentage = float(votes) / float(total_votes) * 100
+
+
+        candidate_results = (
+
+        f"{candidate_name}: {vote_percentage:.1f}% ({votes})\n"
+        )
+        print(candidate_results)
+        txt_file.write(candidate_results)
